@@ -51,8 +51,7 @@ namespace Problem1
         private void FillComboBox()
         {
             try
-            {
-                
+            {              
                 StatusSort.Items.Add("(All Students)");
                 MySqlConnection connection = new MySqlConnection($"datasource={DatabaseConfig.ServerName};port=3306;username={DatabaseConfig.UserID};password={DatabaseConfig.Password};database={DatabaseConfig.DatabaseName}");
                 connection.Open();
@@ -85,8 +84,7 @@ namespace Problem1
             else
             {
                 string statuscode = StatusSort.SelectedItem.ToString();
-                string connectionString = $"datasource={DatabaseConfig.ServerName};port=3306;username={DatabaseConfig.UserID};password={DatabaseConfig.Password};database={DatabaseConfig.DatabaseName}";
-                MySqlConnection connection = new MySqlConnection(connectionString);
+                MySqlConnection connection = new MySqlConnection($"datasource={DatabaseConfig.ServerName};port=3306;username={DatabaseConfig.UserID};password={DatabaseConfig.Password};database={DatabaseConfig.DatabaseName}");
                 connection.Open();
                 string query = "SELECT Students.StudentID, Students.Firstname, Students.Lastname, Students.Age, Students.Address, Students.Gender, StatusTable.StatusCode " +
                                    "FROM Students " +
@@ -100,7 +98,6 @@ namespace Problem1
                 adapter.Fill(dataTable);
                 studentlist.DataSource = dataTable;
             }
-
         }
 
         private void Add_Click(object sender, EventArgs e)
@@ -140,15 +137,13 @@ namespace Problem1
                 }
                 else
                 {
-                    MessageBox.Show("Failed to create account", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                    MessageBox.Show("Failed to create an account", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void Update_Click(object sender, EventArgs e)
